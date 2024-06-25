@@ -7,6 +7,7 @@ const Product= require('./models/Product');
 const cors= require('cors');
 const { ProductRouter } = require('./routes/ProductRoute');
 const { CartRouter } = require('./routes/CartRoute');
+const { verifyToken } = require('./Middleware/VerifyUser');
 require('dotenv').config();
 
 
@@ -22,9 +23,9 @@ connectDB();
 
 // Define a simple route
 
-app.use('/api/products', ProductRouter);
+app.use('/api/products',verifyToken, ProductRouter);
 app.use('/api/users', UserRouter);
-app.use('/api/Cart', CartRouter);
+app.use('/api/Cart', verifyToken,CartRouter);
 
 // Import and use your route files
 // const userRoutes = require('./routes/userRoutes');
