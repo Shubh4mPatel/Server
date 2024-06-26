@@ -3,10 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/connection');
 const { UserRouter } = require('./routes/UserRoute');
-const Product= require('./models/Product');
 const cors= require('cors');
 const { ProductRouter } = require('./routes/ProductRoute');
 const { CartRouter } = require('./routes/CartRoute');
+const { TokenValidation } = require('./Middlewares/TokenValidation');
 require('dotenv').config();
 
 
@@ -22,9 +22,10 @@ connectDB();
 
 // Define a simple route
 
-app.use('/api/products', ProductRouter);
+
 app.use('/api/users', UserRouter);
-app.use('/api/Cart', CartRouter);
+app.use('/api/products',TokenValidation, ProductRouter);
+app.use('/api/Cart',TokenValidation, CartRouter);
 
 // Import and use your route files
 // const userRoutes = require('./routes/userRoutes');
