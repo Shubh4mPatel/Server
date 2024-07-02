@@ -23,9 +23,9 @@ connectDB();
 
 // Define a simple route
 
-app.use('/api/products',verifyToken, ProductRouter);
+app.use('/api/products', ProductRouter);
 app.use('/api/users', UserRouter);
-app.use('/api/Cart', verifyToken,CartRouter);
+app.use('/api/Cart',CartRouter);
 
 // Import and use your route files
 // const userRoutes = require('./routes/userRoutes');
